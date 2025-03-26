@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    align-items: center;
+    padding: 1em;
+    gap: 1em;
+}
+
+.logoFrame{
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 50%;
+    background: #1C4A2A;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    width: 1.4em;
+    height: 1.4em;
+    box-sizing: border-box;
+}
+
+.head{
+    font-size: 1.7em;
+    line-height: 100%;
+    /* letter-spacing: -0.1em; */
+    text-align: center;
+    vertical-align: middle;
+    color:#1C4A2A;
+    height: 1em;
+    margin: 0px;
+}

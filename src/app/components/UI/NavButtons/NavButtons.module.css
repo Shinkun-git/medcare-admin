@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.container button{
+    padding: 0.75em 2em;
+    border-radius: 0.5em;
+    font-size: 1em;
+    line-height: 100%;
+    /* letter-spacing: -1em; */
+    vertical-align: middle;
+    text-align: center;
+    font-style: inherit;
+    font-family: inherit;
+}
+
+.loginButton{
+    border: 1px solid #E0E8E0;
+    background-color: white;
+    color: #0E2515;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.registerButton{
+    background-color: #1C4A2A;
+    cursor: pointer;
+    color: white;
+    border: none;
+    box-sizing: border-box;
+}

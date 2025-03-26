@@ -1,0 +1,20 @@
+.container{
+    z-index: 3;
+    position: sticky;
+    top: 0;
+    left: 0;
+    padding: 3vh 5vw;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    height: 12dvh;
+    width: 100%;
+    background-color: white;
+}
+
+.HeadLink{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3.5em;
+}

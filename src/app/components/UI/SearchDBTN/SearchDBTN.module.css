@@ -1,0 +1,13 @@
+.button {
+    width: 100%;
+    border-radius: 10px;
+    padding: 20px 48px;
+    color: #ffffff;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    text-align: center;
+    vertical-align: middle;
+    border: none;
+    cursor: pointer;
+}

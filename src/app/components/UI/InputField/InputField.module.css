@@ -1,0 +1,48 @@
+.outerFrame {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 12;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-size: 16;
+}
+
+.innerFrame {
+    padding: 20 24;
+    display: flex;
+    gap: 206;
+    background-color: #F5F5F5;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.mainFrame {
+    display: flex;
+    gap: 12;
+}
+
+.mainFrame section {
+    width: 20;
+    height: 20;
+}
+
+
+.input {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: -1%;
+    vertical-align: middle;
+    color: #8C8C8C;
+    background: none;
+    border: none;
+    field-sizing: content;
+    max-width: 480px;
+}
+
+.input:focus {
+    outline: none;
+}

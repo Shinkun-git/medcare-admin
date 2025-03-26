@@ -1,0 +1,106 @@
+.container {
+    min-height: calc(100dvh - 12dvh);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.bgImage {
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    right: 0px;
+}
+
+.searchField {
+    width: 35em;
+    box-sizing: border-box;
+    padding: 2em 1.5em;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1em;
+    border-radius: 1em;
+    background: linear-gradient(153.61deg, rgba(239, 239, 239, 0.6) 0%, rgba(239, 239, 239, 0.08) 100%);
+    border: 1px solid #EFEFEF;
+    backdrop-filter: blur(20px);
+}
+
+.head {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 2em;
+    line-height: 100%;
+    /* letter-spacing: -1%; */
+    vertical-align: middle;
+    color: var(--green-text, #0E2515);
+}
+
+.searchDetails {
+    width: 100%;
+    display: flex;
+    padding: 0.5em 0px;
+    color: #8C8C8C;
+}
+
+.searchDetails span {
+    font-size: 1em;
+    line-height: 100%;
+    vertical-align: middle;
+}
+
+.searchDetails a {
+    text-decoration: none;
+    color: #1C4A2A;
+}
+
+.searchDetails2 {
+    width: 100%;
+    color: #8C8C8C;
+    gap: 1em;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    font-size: 1em;
+    line-height: 100%;
+    vertical-align: middle;
+}
+.searchDetails2 > label{
+    width: 100%;
+}
+
+.forgot {
+    width: 100%;
+    gap:1em;
+    display: flex;
+    justify-content: center;
+}
+.forgot > a{
+    font-size: 1em;
+    line-height: 100%;
+    text-align: center;
+    vertical-align: middle;
+    color: #0E2515;
+    text-decoration: none;
+}
+
+.alreadyLoggedIn {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.alreadyLoggedIn p {
+    font-size: 18px;
+    color: #1C4A2A;
+    font-weight: bold;
+    margin-bottom: 15px;
+}

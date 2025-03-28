@@ -8,17 +8,14 @@ export default function NavLinks() {
 
     return (
         <section className={styles.container}>
-            <Link href="/landingPage" className={pathname === "/landingPage" ? styles.currentPageLink : styles.defaultLink}>
+            <Link href="/" className={pathname === "/" ? styles.currentPageLink : styles.defaultLink}>
                 Home
             </Link>
-            <Link href="/appointment" className={pathname === "/appointment" ? styles.currentPageLink : styles.defaultLink}>
-                Appointments
+            <Link href="/booking-request" className={pathname === "/booking-request" ? styles.currentPageLink : styles.defaultLink}>
+                Slot Bookings
             </Link>
-            <Link href="/appointment1" className={pathname === "/blog" ? styles.currentPageLink : styles.defaultLink}>
-                Health Blog
-            </Link>
-            <Link href="/booking" className={pathname === "/reviews" ? styles.currentPageLink : styles.defaultLink}>
-                Reviews
+            <Link href="/create-doctor" className={pathname === "/create-doctor" ? styles.currentPageLink : styles.defaultLink}>
+                Add Doctor
             </Link>
         </section>
     );

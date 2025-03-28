@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import ImageUpload from "@/app/components/UI/ImageUpload/ImageUpload.jsx";
 
 type AvailabilityType = {
     [day: string]: string[]; // Each day has an array of time slots
@@ -14,6 +15,7 @@ type DoctorType = {
     location: string;
     degree: string;
     availability?: AvailabilityType; // Optional JSONB-like structure
+    image_url : string;
 };
 
 
@@ -36,6 +38,7 @@ const createDoctorPage = () => {
             Saturday: [],
             Sunday: [],
         },
+        image_url: "",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -53,6 +56,9 @@ const createDoctorPage = () => {
         }));
     };
 
+    const onUpload = (image_url:string)=>{
+        setFormData({...formData, image_url: image_url})
+    }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
@@ -81,6 +87,7 @@ const createDoctorPage = () => {
                         Saturday: [],
                         Sunday: [],
                     },
+                    image_url: ""
                 });
             } else {
                 alert("Failed to add doctor.");
@@ -122,7 +129,11 @@ const createDoctorPage = () => {
                             onBlur={(e) => handleAvailabilityChange(day, e.target.value)} />
                     </div>
                 ))}
+                <br />
 
+                <ImageUpload onUpload={onUpload}/>
+
+                <br />
                 <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Add Doctor</button>
             </form>
         </main>

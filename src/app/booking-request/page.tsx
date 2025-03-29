@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-
+import styles from "./page.module.css";
 type SlotType = {
     slot_id: number;
     user_name: string;
@@ -24,8 +24,8 @@ const BookingReqPage = () => {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/All`,{
-                    credentials:"include"
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/All`, {
+                    credentials: "include"
                 });
                 if (!response.ok) throw new Error("Failed to fetch slots");
                 const { data } = await response.json();
@@ -45,22 +45,22 @@ const BookingReqPage = () => {
         try {
             if (!slot_id || !action) throw new Error('SlotID & action both required.');
             if (action === "confirm") {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/approve`,{
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/approve`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({slot_id}),
-                    credentials:"include"
+                    body: JSON.stringify({ slot_id }),
+                    credentials: "include"
                 }
                 );
                 if (!response.ok) throw new Error('Failed response from /approve');
                 const { data } = await response.json();
                 alert(`slotID : ${data.slot_id} booked`);
             } else {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/cancel`,{
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/cancel`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body : JSON.stringify({slot_id}),
-                    credentials:"include"
+                    body: JSON.stringify({ slot_id }),
+                    credentials: "include"
                 });
                 if (!response.ok) throw new Error('Failed response from /cancel');
                 const { data } = await response.json();
@@ -73,43 +73,45 @@ const BookingReqPage = () => {
     }
 
     return (
-        <main className="p-5">
-            <h2 className="text-xl font-semibold mb-4">Booking Requests</h2>
+        <main className={styles.container}>
+            <h2 className={styles.title}>Booking Requests</h2>
 
             {loading ? (
-                <p className="text-blue-500">Loading slots...</p>
+                <p className={styles.loading}>Loading slots...</p>
             ) : error ? (
-                <p className="text-red-500">{error}</p>
+                <p className={styles.error}>{error}</p>
             ) : slots.length === 0 ? (
-                <p className="text-gray-500">No slots available.</p>
+                <p className={styles.noSlots}>No slots available.</p>
             ) : (
-                <ul>
+                <ul className={styles.slotList}>
                     {slots.map((slot) => (
-                        <li key={slot.slot_id} className="border p-3 rounded shadow-md mb-2">
-                            <strong>Slot ID:</strong> {slot.slot_id} <br />
-                            <strong>Doctor Name:</strong> {slot.name} <br />
-                            <strong>User Email:</strong> {slot.user_name} <br />
-                            <strong>Slot Date:</strong> {slot.slot_date} <br />
-                            <strong>Slot Time:</strong> {slot.slot_time} <br />
-                            <strong>Booking Mode:</strong> {slot.book_mode} <br />
-                            <strong>Status:</strong> {slot.status} <br />
-                            <strong>Created At:</strong> {new Date(slot.created_at).toLocaleString()} <br />
-                            {slot.book_mode === "offline" && (
-                                <p><strong>Location:</strong> {slot.location}</p>
-                            )}
+                        <li key={slot.slot_id} className={styles.slotItem}>
+                            <div className={styles.slotDetails}>
+                                <strong>Slot ID:</strong> {slot.slot_id}
+                                <strong>Doctor Name:</strong> {slot.name}
+                                <strong>User Email:</strong> {slot.user_name}
+                                <strong>Slot Date:</strong> {slot.slot_date}
+                                <strong>Slot Time:</strong> {slot.slot_time}
+                                <strong>Booking Mode:</strong> {slot.book_mode}
+                                <strong>Status:</strong> {slot.status}
+                                <strong>Created At:</strong> {new Date(slot.created_at).toLocaleString()}
+                                {slot.book_mode === "offline" && (
+                                    <p>
+                                        <strong>Location:</strong> {slot.location}
+                                    </p>
+                                )}
+                            </div>
 
-
-                            {/* Show Confirm and Cancel buttons only if the status is "pending" */}
                             {slot.status === "pending" && (
-                                <div className="mt-2">
+                                <div className={styles.buttonContainer}>
                                     <button
-                                        className="bg-green-500 text-white px-4 py-2 rounded mr-2"
+                                        className={styles.confirmButton}
                                         onClick={() => handleSlotUpdate(slot.slot_id, "confirm")}
                                     >
                                         Confirm
                                     </button>
                                     <button
-                                        className="bg-red-500 text-white px-4 py-2 rounded"
+                                        className={styles.cancelButton}
                                         onClick={() => handleSlotUpdate(slot.slot_id, "cancel")}
                                     >
                                         Cancel
@@ -119,7 +121,6 @@ const BookingReqPage = () => {
                         </li>
                     ))}
                 </ul>
-
             )}
         </main>
     );

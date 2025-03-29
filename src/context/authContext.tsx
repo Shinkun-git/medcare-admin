@@ -1,17 +1,47 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 
+interface User {
+  email: string;
+  name?:string;
+}
+
 interface AuthContextType {
   isAuthenticated: boolean;
   loading: boolean;
-  setAuthenticated: (value: boolean) => void;
+  setAuthenticated: (value: boolean, user?: User | null) => void;
+  user:User|null;
+  logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setAuthenticated] = useState(false);
+  const [isAuthenticated, setAuthenticatedState] = useState(false);
   const [loading, setLoading] = useState(true); // ✅ Added loading state
+  const [user, setUser] = useState<User | null>(null);
+
+  const setAuthenticated = (value: boolean, userData: User | null = null) => {
+    setAuthenticatedState(value);
+    setUser(userData);
+  };
+
+  const logout = async () => {
+    try {
+      const res = await fetch("http://localhost:3003/api/v1/users/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        setAuthenticated(false, null); // Reset authentication & user
+      } else {
+        console.error("Logout failed");
+      }
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
 
   // Initial auth check (Runs on first load)
   useEffect(() => {
@@ -22,23 +52,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
 
         if (res.ok) {
-          setAuthenticated(true);
+          const userData = await res.json();
+          console.log("user data in auth provider ",userData.user);
+          setAuthenticated(true,userData.user);
         } else {
-          setAuthenticated(false);
+          setAuthenticated(false,null);
         }
       } catch (error) {
         console.error("Error checking authentication", error);
-        setAuthenticated(false);
+        setAuthenticated(false,null);
       } finally {
-        setLoading(false); // ✅ Ensure loading is set to false after check
+        setLoading(false);
       }
     };
-
     checkAuth();
-  }, []);
+  }, [isAuthenticated]);
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, loading, setAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, user, loading, setAuthenticated,logout }}>
       {children}
     </AuthContext.Provider>
   );

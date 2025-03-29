@@ -24,13 +24,15 @@ const BookingReqPage = () => {
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/All`);
+                const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/All`,{
+                    credentials:"include"
+                });
                 if (!response.ok) throw new Error("Failed to fetch slots");
-
                 const { data } = await response.json();
+                // console.log("date in first slot ,", data[0].slot_date, " ", data[0].slot_id);
                 setSlots(data);
             } catch (err) {
-                setError("Error fetching slots. Please try again later.");
+                setError("No Slot bookings found!");
             } finally {
                 setLoading(false);
             }
@@ -47,6 +49,7 @@ const BookingReqPage = () => {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({slot_id}),
+                    credentials:"include"
                 }
                 );
                 if (!response.ok) throw new Error('Failed response from /approve');
@@ -57,6 +60,7 @@ const BookingReqPage = () => {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body : JSON.stringify({slot_id}),
+                    credentials:"include"
                 });
                 if (!response.ok) throw new Error('Failed response from /cancel');
                 const { data } = await response.json();
@@ -83,8 +87,8 @@ const BookingReqPage = () => {
                     {slots.map((slot) => (
                         <li key={slot.slot_id} className="border p-3 rounded shadow-md mb-2">
                             <strong>Slot ID:</strong> {slot.slot_id} <br />
-                            <strong>Doctor ID:</strong> {slot.user_name} <br />
-                            <strong>User Email:</strong> {slot.name} <br />
+                            <strong>Doctor Name:</strong> {slot.name} <br />
+                            <strong>User Email:</strong> {slot.user_name} <br />
                             <strong>Slot Date:</strong> {slot.slot_date} <br />
                             <strong>Slot Time:</strong> {slot.slot_time} <br />
                             <strong>Booking Mode:</strong> {slot.book_mode} <br />

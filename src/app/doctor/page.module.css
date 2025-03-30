@@ -2,7 +2,7 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 30px;
 }
 
 /* Header */
@@ -10,85 +10,107 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .title {
-    font-size: 24px;
+    font-size: 28px;
     font-weight: bold;
-    color: #333;
+    color: #222;
 }
 
 /* Create Doctor Button */
 .createButton {
-    background-color: #007bff;
+    background-color: #28a745;
     color: white;
     border: none;
-    padding: 10px 15px;
+    padding: 12px 18px;
     font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s ease-in-out;
+    border-radius: 8px;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
 .createButton:hover {
-    background-color: #0056b3;
+    background-color: #218838;
+    transform: scale(1.05);
 }
 
-/* Grid Layout */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+/* Flexbox Container */
+.flexContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 20px;
 }
 
 /* Doctor Card */
 .card {
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
-    transition: transform 0.2s ease-in-out;
+    padding-bottom: 15px;
 }
 
 .card:hover {
-    transform: scale(1.03);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* Doctor Image */
+/* Image Wrapper */
+.imageWrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
 .image {
     width: 100%;
-    height: 200px;
+    height: 100%;
     object-fit: cover;
-    border-radius: 8px;
 }
 
-/* Doctor Name */
+/* Card Body */
+.cardBody {
+    padding: 15px;
+    text-align: center;
+}
+
 .name {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin: 10px 0;
     color: #333;
+    margin-bottom: 5px;
 }
 
-/* Details */
 .details {
     font-size: 16px;
     color: #555;
     margin-bottom: 8px;
 }
 
-/* Experience */
 .experience {
     font-size: 14px;
     color: #777;
     margin-bottom: 5px;
 }
 
-/* Rating */
 .rating {
     font-size: 16px;
     font-weight: bold;
     color: #f39c12;
+}
+
+/* Card Footer */
+.cardFooter {
+    margin-top: auto;
+    padding-top: 12px;
 }

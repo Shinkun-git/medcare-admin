@@ -1,7 +1,7 @@
 "use client"
 import { useState } from "react";
 import ImageUpload from "@/app/components/UI/ImageUpload/ImageUpload.jsx";
-
+import styles from "./page.module.css";
 type AvailabilityType = {
     [day: string]: string[]; // Each day has an array of time slots
 };
@@ -101,41 +101,90 @@ const createDoctorPage = () => {
     };
 
     return (
-        <main className="p-6">
-            <h1 className="text-2xl font-bold mb-4">Add a New Doctor</h1>
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Doctor's Name" required className="border p-2 w-full" />
+        <main className={styles.container}>
+            <h1 className={styles.heading}>Add a New Doctor</h1>
+            <form onSubmit={handleSubmit} className={styles.form}>
+                <input 
+                    type="text" 
+                    name="name" 
+                    value={formData.name} 
+                    onChange={handleChange} 
+                    placeholder="Doctor's Name" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <select name="gender" value={formData.gender} onChange={handleChange} required className="border p-2 w-full">
+                <select name="gender" value={formData.gender} onChange={handleChange} required className={styles.input}>
                     <option value="">Select Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                 </select>
 
-                <input type="text" name="specification" value={formData.specification} onChange={handleChange} placeholder="Specialization" required className="border p-2 w-full" />
+                <input 
+                    type="text" 
+                    name="specification" 
+                    value={formData.specification} 
+                    onChange={handleChange} 
+                    placeholder="Specialization" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <input type="number" name="experience" value={formData.experience} onChange={handleChange} placeholder="Years of Experience" required className="border p-2 w-full" />
+                <input 
+                    type="number" 
+                    name="experience" 
+                    value={formData.experience} 
+                    onChange={handleChange} 
+                    placeholder="Years of Experience" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <textarea name="description" value={formData.description} onChange={handleChange} placeholder="Description" required className="border p-2 w-full" />
+                <textarea 
+                    name="description" 
+                    value={formData.description} 
+                    onChange={handleChange} 
+                    placeholder="Description" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <input type="text" name="location" value={formData.location} onChange={handleChange} placeholder="Location" required className="border p-2 w-full" />
+                <input 
+                    type="text" 
+                    name="location" 
+                    value={formData.location} 
+                    onChange={handleChange} 
+                    placeholder="Location" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <input type="text" name="degree" value={formData.degree} onChange={handleChange} placeholder="Degree" required className="border p-2 w-full" />
+                <input 
+                    type="text" 
+                    name="degree" 
+                    value={formData.degree} 
+                    onChange={handleChange} 
+                    placeholder="Degree" 
+                    required 
+                    className={styles.input} 
+                />
 
-                <h2 className="text-xl font-bold mt-4">Availability</h2>
+                <h2 className={styles.subHeading}>Availability</h2>
                 {Object.keys(formData.availability || {}).map((day) => (
-                    <div key={day} className="border p-2">
-                        <label className="font-semibold">{day}</label>
-                        <input type="text" placeholder="Enter time slot" className="border p-2 w-full mt-2"
-                            onBlur={(e) => handleAvailabilityChange(day, e.target.value)} />
+                    <div key={day} className={styles.availability}>
+                        <label className={styles.label}>{day}</label>
+                        <input 
+                            type="text" 
+                            placeholder="Enter time slot" 
+                            className={styles.input} 
+                            onBlur={(e) => handleAvailabilityChange(day, e.target.value)} 
+                        />
                     </div>
                 ))}
-                <br />
 
-                <ImageUpload onUpload={onUpload}/>
+                <ImageUpload onUpload={onUpload} />
 
-                <br />
-                <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Add Doctor</button>
+                <button type="submit" className={styles.button}>Add Doctor</button>
             </form>
         </main>
     );

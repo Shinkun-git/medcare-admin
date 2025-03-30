@@ -83,22 +83,23 @@ const BookingReqPage = () => {
             ) : slots.length === 0 ? (
                 <p className={styles.noSlots}>No slots available.</p>
             ) : (
-                <ul className={styles.slotList}>
+                <div className={styles.slotGrid}>
                     {slots.map((slot) => (
-                        <li key={slot.slot_id} className={styles.slotItem}>
+                        <div key={slot.slot_id} className={styles.slotCard}>
+                            <div className={styles.slotHeader}>
+                                <span className={styles.statusBadge}>
+                                    {slot.status}
+                                </span>
+                            </div>
                             <div className={styles.slotDetails}>
-                                <strong>Slot ID:</strong> {slot.slot_id}
-                                <strong>Doctor Name:</strong> {slot.name}
-                                <strong>User Email:</strong> {slot.user_name}
-                                <strong>Slot Date:</strong> {slot.slot_date}
-                                <strong>Slot Time:</strong> {slot.slot_time}
-                                <strong>Booking Mode:</strong> {slot.book_mode}
-                                <strong>Status:</strong> {slot.status}
-                                <strong>Created At:</strong> {new Date(slot.created_at).toLocaleString()}
+                                <p><strong>Doctor:</strong> {slot.name}</p>
+                                <p><strong>User:</strong> {slot.user_name}</p>
+                                <p><strong>Date:</strong> {slot.slot_date}</p>
+                                <p><strong>Time:</strong> {slot.slot_time}</p>
+                                <p><strong>Mode:</strong> {slot.book_mode}</p>
+                                <p><strong>Created:</strong> {new Date(slot.created_at).toLocaleString()}</p>
                                 {slot.book_mode === "offline" && (
-                                    <p>
-                                        <strong>Location:</strong> {slot.location}
-                                    </p>
+                                    <p><strong>Location:</strong> {slot.location}</p>
                                 )}
                             </div>
 
@@ -106,21 +107,21 @@ const BookingReqPage = () => {
                                 <div className={styles.buttonContainer}>
                                     <button
                                         className={styles.confirmButton}
-                                        onClick={() => handleSlotUpdate(slot.slot_id,"confirm")}
+                                        onClick={() => handleSlotUpdate(slot.slot_id, "confirm")}
                                     >
                                         Confirm
                                     </button>
                                     <button
                                         className={styles.cancelButton}
-                                        onClick={() => handleSlotUpdate(slot.slot_id,"cancel")}
+                                        onClick={() => handleSlotUpdate(slot.slot_id, "cancel")}
                                     >
                                         Cancel
                                     </button>
                                 </div>
                             )}
-                        </li>
+                        </div>
                     ))}
-                </ul>
+                </div>
             )}
         </main>
     );

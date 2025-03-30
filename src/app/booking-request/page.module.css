@@ -1,25 +1,25 @@
 .container {
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px;
     margin: auto;
-    padding: 1.5rem;
-    background: #f9fafb;
+    padding: 2rem;
+    background: #f8f9fa;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 700;
-    margin-bottom: 1rem;
     text-align: center;
     color: #374151;
+    margin-bottom: 1.5rem;
 }
 
-.loading,
-.error,
-.noSlots {
+/* Loading & Error Messages */
+.loading, .error, .noSlots {
     text-align: center;
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
 }
 
@@ -35,42 +35,79 @@
     color: #6b7280;
 }
 
-.slotList {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
+/* Slot Grid Layout */
+.slotGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
 }
 
-.slotItem {
+/* Individual Slot Card */
+.slotCard {
     background: white;
     padding: 1.5rem;
     border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.slotItem:hover {
-    transform: translateY(-3px);
+.slotCard:hover {
+    transform: translateY(-5px);
 }
 
+/* Slot Details */
 .slotDetails {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.slotDetails strong {
-    font-weight: 600;
+.slotDetails p {
+    font-size: 1rem;
     color: #374151;
 }
 
+.slotDetails strong {
+    font-weight: 600;
+    color: #111827;
+}
+
+/* Status Badge */
+.statusBadge {
+    padding: 0.4rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 5px;
+    text-transform: capitalize;
+    display: inline-block;
+}
+
+.statusBadge.pending {
+    background: #facc15;
+    color: #713f12;
+}
+
+.statusBadge.confirmed {
+    background: #10b981;
+    color: white;
+}
+
+.statusBadge.canceled {
+    background: #ef4444;
+    color: white;
+}
+
+/* Button Container */
 .buttonContainer {
     margin-top: 1rem;
     display: flex;
     gap: 0.5rem;
 }
 
+/* Buttons */
 .confirmButton,
 .cancelButton {
     flex: 1;
@@ -80,7 +117,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
 }
 
 .confirmButton {
@@ -99,4 +136,19 @@
 
 .cancelButton:hover {
     background: #dc2626;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .slotGrid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .slotDetails p {
+        font-size: 0.9rem;
+    }
 }

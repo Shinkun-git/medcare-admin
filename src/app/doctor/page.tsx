@@ -28,28 +28,34 @@ export default async function DoctorsPage() {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.header}>
+        <main className={styles.container}>
+            <section className={styles.header}>
                 <h1 className={styles.title}>Doctors List</h1>
-                <Link href='/doctor/create'>
-                    <button className={styles.createButton}>Create Doctor</button>
+                <Link href="/doctor/create">
+                    <button className={styles.createButton}>+ Add Doctor</button>
                 </Link>
-            </div>
-            <div className={styles.grid}>
+            </section>
+
+            <section className={styles.flexContainer}>
                 {doctors?.map((doctor) => (
                     <div key={doctor.doc_id} className={styles.card}>
-                        <img src={doctor.image_url} alt={doctor.name} className={styles.image} />
-                        <h2 className={styles.name}>{doctor.name}</h2>
-                        <p className={styles.details}>
-                            {doctor.degree} - {doctor.specification}
-                        </p>
-                        <p className={styles.experience}>Experience: {doctor.experience} years</p>
-                        <p className={styles.rating}>⭐ {doctor.rating}</p>
-                        {/* Delete Button (Client Component) */}
-                        <DeleteDoctorButton doc_id={doctor.doc_id} />
+                        <div className={styles.imageWrapper}>
+                            <img src={doctor.image_url} alt={doctor.name} className={styles.image} />
+                        </div>
+                        <div className={styles.cardBody}>
+                            <h2 className={styles.name}>{doctor.name}</h2>
+                            <p className={styles.details}>
+                                {doctor.degree} - {doctor.specification}
+                            </p>
+                            <p className={styles.experience}>Experience: {doctor.experience} years</p>
+                            <p className={styles.rating}>⭐ {doctor.rating}</p>
+                        </div>
+                        <div className={styles.cardFooter}>
+                            <DeleteDoctorButton doc_id={doctor.doc_id} />
+                        </div>
                     </div>
                 ))}
-            </div>
-        </div>
+            </section>
+        </main>
     );
 }

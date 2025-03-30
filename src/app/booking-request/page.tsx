@@ -41,14 +41,14 @@ const BookingReqPage = () => {
         fetchAllBookings();
     }, [changeStatus]);
 
-    const handleSlotUpdate = async (slot_id: number, action: string) => {
+    const handleSlotUpdate = async (slot_id: number,action: string) => {
         try {
             if (!slot_id || !action) throw new Error('SlotID & action both required.');
             if (action === "confirm") {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/approve`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ slot_id }),
+                    body: JSON.stringify({ slot_id , name}),
                     credentials: "include"
                 }
                 );
@@ -106,13 +106,13 @@ const BookingReqPage = () => {
                                 <div className={styles.buttonContainer}>
                                     <button
                                         className={styles.confirmButton}
-                                        onClick={() => handleSlotUpdate(slot.slot_id, "confirm")}
+                                        onClick={() => handleSlotUpdate(slot.slot_id,"confirm")}
                                     >
                                         Confirm
                                     </button>
                                     <button
                                         className={styles.cancelButton}
-                                        onClick={() => handleSlotUpdate(slot.slot_id, "cancel")}
+                                        onClick={() => handleSlotUpdate(slot.slot_id,"cancel")}
                                     >
                                         Cancel
                                     </button>

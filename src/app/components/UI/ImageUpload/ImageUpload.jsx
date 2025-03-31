@@ -16,7 +16,7 @@ const ImageUpload = ({ onUpload }) => {
 
     try {
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/du3w4rerh/image/upload`,
+        process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_URL,
         {
           method: "POST",
           body: formData,
@@ -24,12 +24,12 @@ const ImageUpload = ({ onUpload }) => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log("Uploaded Image:", data);
+        // console.log("Uploaded Image:", data);
         onUpload(data.secure_url);
         alert("Image uploaded successfully!");
       } else {
         const errorData = await response.json();
-        console.error(errorData.error.message);
+        // console.error(errorData.error.message);
         alert(errorData.error.message);
       }
     } catch (error) {

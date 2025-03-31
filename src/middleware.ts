@@ -12,5 +12,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: [ "/doctor/:path*", "/booking-request/:path*"], // Protect admin routes
+    matcher: [ "/doctor/:path*", "/booking-request/:path*"] // Protect admin routes
 };

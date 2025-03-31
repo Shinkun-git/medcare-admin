@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useRouter,useSearchParams } from "next/navigation"; // ✅ Fixed import
 import Image from "next/image";
-import Link from "next/link";
+
 import styles from "./page.module.css";
 import SearchDBTN from "@/app/components/UI/SearchDBTN/SearchDBTN";
 import { Montserrat } from "next/font/google";
@@ -27,7 +27,7 @@ const Page = () => {
         setError(""); // Clear previous errors
 
         try {
-            const response = await fetch("http://localhost:3003/api/v1/users/login", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/users/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 credentials: "include", // ✅ Important for sending cookies
@@ -68,7 +68,7 @@ const Page = () => {
                     <div className={styles.alreadyLoggedIn}>
                         <p>You are already logged in.</p>
                         <SearchDBTN text="Go Back" bgColor="#1C4A2A" 
-                        onClick={() => document.referrer? router.back(): router.replace("/landingPage")} />
+                        onClick={() => document.referrer? router.back(): router.replace("/")} />
                     </div>
                 ) : (
                     <form className={styles.searchDetails2} onSubmit={handleLogin}>

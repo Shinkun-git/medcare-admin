@@ -20,7 +20,7 @@ type Doctor = {
 
 export default async function DoctorsPage() {
    const isAuthenticated = await isUserAuthenticated();
-   console.log('Is auth in doctor : - ', isAuthenticated);
+//    console.log('Is auth in doctor : - ', isAuthenticated);
    if(!isAuthenticated){
     redirect("/login");
    }

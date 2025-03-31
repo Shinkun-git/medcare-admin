@@ -1,7 +1,7 @@
 .container {
     width: 100%;
     display: flex;
-    gap: 2.5em;
+    gap: 3vw;
     line-height: 100%;
     /* letter-spacing: -1rem; */
     text-align: center;
@@ -12,7 +12,8 @@
     font-size: 1em;
     color: #8C8C8C;
     text-decoration: none;
-    transition: color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    opacity: 1;
 }
 
 .currentPageLink, .defaultLink:hover{
@@ -20,4 +21,47 @@
     color: #1C4A2A;
     font-weight: bold;
     text-decoration: none;
+    opacity: 1;
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+        gap: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .container {
+        gap: 2vw;
+    }
+}
+
+@media screen and (max-width: 890px) {
+    .container {
+        gap: 0;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 2em;
+        width: 100%;
+        padding: 2em 0;
+    }
+
+    .defaultLink, .currentPageLink {
+        font-size: 1.1em;
+        width: 100%;
+        text-align: center;
+        padding: 0.5em 0;
+        color: white;
+        opacity: 1;
+    }
+
+    .defaultLink:hover, .currentPageLink {
+        color: #ffffff;
+        font-weight: 600;
+    }
 }

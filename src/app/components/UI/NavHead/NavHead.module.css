@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     padding: 1em;
-    gap: 1em;
+    gap: 3vw;
 }
 
 .logoFrame{
@@ -30,4 +30,32 @@
     color:#1C4A2A;
     height: 1em;
     margin: 0px;
+}
+
+@media screen and (max-width: 880px){ 
+    .container{
+        padding: 1em 0.5em;
+        gap:2.5vw;
+    }
+}
+@media screen and (max-width: 820px){ 
+    .container{
+        gap: 1vw;
+    }
+}
+@media screen and (max-width: 768px){ 
+    .head{
+        display: none;
+    }
+}
+
+@media(max-width:500px){
+    .container{
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    .head{
+        display: block;
+    }
 }

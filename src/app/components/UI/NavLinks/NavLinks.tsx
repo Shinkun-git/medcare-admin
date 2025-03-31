@@ -12,9 +12,9 @@ export default function NavLinks() {
                 Home
             </Link>
             <Link href="/booking-request" className={pathname === "/booking-request" ? styles.currentPageLink : styles.defaultLink}>
-                Slot Bookings
+                Bookings
             </Link>
-            <Link href="/doctor" className={pathname === "/create-doctor" ? styles.currentPageLink : styles.defaultLink}>
+            <Link href="/doctor" className={pathname === "/doctor" ? styles.currentPageLink : styles.defaultLink}>
                 Doctors
             </Link>
         </section>

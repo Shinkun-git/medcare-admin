@@ -15,7 +15,8 @@ type DoctorType = {
     location: string;
     degree: string;
     availability?: AvailabilityType; // Optional JSONB-like structure
-    image_url : string;
+    image_url: string;
+    rating: number;
 };
 
 
@@ -39,6 +40,7 @@ const createDoctorPage = () => {
             Sunday: [],
         },
         image_url: "",
+        rating: 0,
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -56,8 +58,8 @@ const createDoctorPage = () => {
         }));
     };
 
-    const onUpload = (image_url:string)=>{
-        setFormData({...formData, image_url: image_url})
+    const onUpload = (image_url: string) => {
+        setFormData({ ...formData, image_url: image_url })
     }
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -66,7 +68,7 @@ const createDoctorPage = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
-                credentials:"include",
+                credentials: "include",
             });
 
             if (response.ok) {
@@ -88,7 +90,8 @@ const createDoctorPage = () => {
                         Saturday: [],
                         Sunday: [],
                     },
-                    image_url: ""
+                    image_url: "",
+                    rating: 0
                 });
             } else {
                 alert("Failed to add doctor.");
@@ -104,14 +107,14 @@ const createDoctorPage = () => {
         <main className={styles.container}>
             <h1 className={styles.heading}>Add a New Doctor</h1>
             <form onSubmit={handleSubmit} className={styles.form}>
-                <input 
-                    type="text" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange} 
-                    placeholder="Doctor's Name" 
-                    required 
-                    className={styles.input} 
+                <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Doctor's Name"
+                    required
+                    className={styles.input}
                 />
 
                 <select name="gender" value={formData.gender} onChange={handleChange} required className={styles.input}>
@@ -120,64 +123,80 @@ const createDoctorPage = () => {
                     <option value="Female">Female</option>
                 </select>
 
-                <input 
-                    type="text" 
-                    name="specification" 
-                    value={formData.specification} 
-                    onChange={handleChange} 
-                    placeholder="Specialization" 
-                    required 
-                    className={styles.input} 
+                <input
+                    type="text"
+                    name="specification"
+                    value={formData.specification}
+                    onChange={handleChange}
+                    placeholder="Specialization"
+                    required
+                    className={styles.input}
+                />
+                <label htmlFor="experience">
+                    Experience
+                    <input
+                        type="number"
+                        name="experience"
+                        value={formData.experience}
+                        onChange={handleChange}
+                        placeholder="Years of Experience"
+                        required
+                        className={styles.input}
+                        id="experience"
+                    />
+                </label>
+
+                <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    placeholder="Description"
+                    required
+                    className={styles.input}
                 />
 
-                <input 
-                    type="number" 
-                    name="experience" 
-                    value={formData.experience} 
-                    onChange={handleChange} 
-                    placeholder="Years of Experience" 
-                    required 
-                    className={styles.input} 
+                <input
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    placeholder="Location"
+                    required
+                    className={styles.input}
                 />
 
-                <textarea 
-                    name="description" 
-                    value={formData.description} 
-                    onChange={handleChange} 
-                    placeholder="Description" 
-                    required 
-                    className={styles.input} 
+                <input
+                    type="text"
+                    name="degree"
+                    value={formData.degree}
+                    onChange={handleChange}
+                    placeholder="Degree"
+                    required
+                    className={styles.input}
                 />
-
-                <input 
-                    type="text" 
-                    name="location" 
-                    value={formData.location} 
-                    onChange={handleChange} 
-                    placeholder="Location" 
-                    required 
-                    className={styles.input} 
-                />
-
-                <input 
-                    type="text" 
-                    name="degree" 
-                    value={formData.degree} 
-                    onChange={handleChange} 
-                    placeholder="Degree" 
-                    required 
-                    className={styles.input} 
-                />
+                <label htmlFor="rating">
+                    Rate
+                    <input
+                        type="number"
+                        name="rating"
+                        value={formData.rating}
+                        onChange={handleChange}
+                        placeholder="Rating"
+                        required
+                        className={styles.input}
+                        id="rating"
+                    />
+                </label>
 
                 <h2 className={styles.subHeading}>Availability</h2>
                 {Object.keys(formData.availability || {}).map((day) => (
                     <div key={day} className={styles.availability}>
                         <label className={styles.label}>{day}</label>
-                        <input 
-                            type="text" 
-                            placeholder="Enter time slot" 
-                            className={styles.input} 
-                            onBlur={(e) => handleAvailabilityChange(day, e.target.value)} 
+                        <input
+                            type="text"
+                            placeholder="Enter time slot"
+                            className={styles.input}
+                            onBlur={(e) => handleAvailabilityChange(day, e.target.value)}
                         />
                     </div>
                 ))}

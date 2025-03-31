@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import { FaUser, FaCalendar, FaClock, FaVideo, FaMapMarkerAlt, FaCheck, FaTimes } from "react-icons/fa";
+
 type SlotType = {
     slot_id: number;
     user_name: string;
@@ -41,17 +43,16 @@ const BookingReqPage = () => {
         fetchAllBookings();
     }, [changeStatus]);
 
-    const handleSlotUpdate = async (slot_id: number,action: string) => {
+    const handleSlotUpdate = async (slot_id: number, action: string) => {
         try {
             if (!slot_id || !action) throw new Error('SlotID & action both required.');
             if (action === "confirm") {
                 const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/api/v1/slots/approve`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ slot_id , name}),
+                    body: JSON.stringify({ slot_id }),
                     credentials: "include"
-                }
-                );
+                });
                 if (!response.ok) throw new Error('Failed response from /approve');
                 const { data } = await response.json();
                 alert(`slotID : ${data.slot_id} booked`);
@@ -87,19 +88,26 @@ const BookingReqPage = () => {
                     {slots.map((slot) => (
                         <div key={slot.slot_id} className={styles.slotCard}>
                             <div className={styles.slotHeader}>
-                                <span className={styles.statusBadge}>
+                                <span className={`${styles.statusBadge} ${styles[slot.status.toLowerCase()]}`}>
                                     {slot.status}
                                 </span>
                             </div>
                             <div className={styles.slotDetails}>
-                                <p><strong>Doctor:</strong> {slot.name}</p>
-                                <p><strong>User:</strong> {slot.user_name}</p>
-                                <p><strong>Date:</strong> {slot.slot_date}</p>
-                                <p><strong>Time:</strong> {slot.slot_time}</p>
-                                <p><strong>Mode:</strong> {slot.book_mode}</p>
-                                <p><strong>Created:</strong> {new Date(slot.created_at).toLocaleString()}</p>
+                                <p><FaUser className={styles.icon} /><strong>Doctor:</strong> {slot.name}</p>
+                                <p><FaUser className={styles.icon} /><strong>User:</strong> {slot.user_name}</p>
+                                <p><FaCalendar className={styles.icon} /><strong>Date:</strong> {slot.slot_date}</p>
+                                <p><FaClock className={styles.icon} /><strong>Time:</strong> {slot.slot_time}</p>
+                                <p>
+                                    {slot.book_mode === "online" ? (
+                                        <FaVideo className={styles.icon} />
+                                    ) : (
+                                        <FaMapMarkerAlt className={styles.icon} />
+                                    )}
+                                    <strong>Mode:</strong> {slot.book_mode}
+                                </p>
+                                <p><FaCalendar className={styles.icon} /><strong>Created:</strong> {new Date(slot.created_at).toLocaleString()}</p>
                                 {slot.book_mode === "offline" && (
-                                    <p><strong>Location:</strong> {slot.location}</p>
+                                    <p><FaMapMarkerAlt className={styles.icon} /><strong>Location:</strong> {slot.location}</p>
                                 )}
                             </div>
 
@@ -109,13 +117,13 @@ const BookingReqPage = () => {
                                         className={styles.confirmButton}
                                         onClick={() => handleSlotUpdate(slot.slot_id, "confirm")}
                                     >
-                                        Confirm
+                                        <FaCheck /> Confirm
                                     </button>
                                     <button
                                         className={styles.cancelButton}
                                         onClick={() => handleSlotUpdate(slot.slot_id, "cancel")}
                                     >
-                                        Cancel
+                                        <FaTimes /> Cancel
                                     </button>
                                 </div>
                             )}

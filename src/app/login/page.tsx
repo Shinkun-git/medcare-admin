@@ -62,12 +62,7 @@ const Page = () => {
                 className={styles.bgImage}
             />
             <section className={`${styles.searchField} ${MontserratFont.className}`}>
-                <span className={styles.head}>Login</span>
-                <div className={styles.searchDetails}>
-                    <span>
-                        Are you a new member? <Link href="/sign-up">Sign up here.</Link>
-                    </span>
-                </div>
+                <span className={styles.head}>Admin Login</span>
 
                 {isAuthenticated ? (
                     <div className={styles.alreadyLoggedIn}>
@@ -105,10 +100,6 @@ const Page = () => {
                         {/* Buttons */}
                         <SearchDBTN text="Login" bgColor="#1C4A2A" type="submit" />
                         <SearchDBTN text="Reset" bgColor="#C6B09A" type="button" onClick={handleReset} />
-
-                        <div className={`${styles.forgot} ${MontserratFont.className}`}>
-                            <a href="">Forgot Password?</a>
-                        </div>
                     </form>
                 )}
             </section>
